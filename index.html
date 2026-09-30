@@ -26,10 +26,13 @@ h2{margin:24px 0 10px;font-size:1.3rem}
 #quiz{max-width:968px;margin:8px auto 12px;padding:16px;background:var(--c);border:1px solid var(--b);border-radius:14px}#quiz h2{margin:4px 0 12px}.qn{margin:0;color:var(--a);font-size:.85rem}
 .btn{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 14px;border:1px solid var(--b);border-radius:10px;background:var(--bg);color:var(--t);font:inherit;cursor:pointer}.btn:hover{border-color:var(--a)}
 .meter{height:10px;background:var(--b);border-radius:6px;overflow:hidden}.meter i{display:block;height:100%;background:var(--a)}
+#quiz.gate{position:fixed;inset:0;z-index:100;max-width:none;margin:0;border-radius:0;border:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;overflow:auto;padding:calc(24px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px))}
+#quiz.gate::before,#quiz.gate::after{content:"";flex:1}#quiz.gate>*{width:100%;max-width:560px;box-sizing:border-box}#quiz.off{display:none}
+.ph{display:inline-block;margin:2px 0 0;color:var(--a);font-size:.9rem;text-decoration:none}
 footer{text-align:center;color:var(--m);font-size:.85rem;padding:0 16px 30px}
 </style></head><body>
-<header><h1>🌆 Отдых в Астане</h1><p>Пройдите тест на настроение из 5 вопросов — и получите подборку. Нажмите ♥, чтобы сохранить место.</p></header>
-<div class="bar"><div id="quiz"></div><input id="q" placeholder="Поиск по местам…"><div class="tabs" id="tabs"></div></div>
+<header><h1>🌆 Отдых в Астане</h1><p><button class="btn" id="rt" style="width:auto;display:inline-block;margin:0 0 8px">🔄 Пройти тест заново</button><br>Пройдите тест на настроение из 5 вопросов — и получите подборку. Нажмите ♥, чтобы сохранить место.</p></header>
+<div class="bar"><div id="quiz" class="gate"></div><input id="q" placeholder="Поиск по местам…"><div class="tabs" id="tabs"></div></div>
 <main id="out"></main>
 <footer>Часы работы и цены меняются — уточняйте перед визитом.</footer>
 <script>
@@ -113,11 +116,12 @@ const QS=[["Сколько у вас сейчас энергии?",[["Много
 ["Как вы себя чувствуете?",[["Устал(а)","5:2,6:2,0:1"],["Радостно","1:2,9:2,4:1"],["Задумчиво","0:2,2:1,7:1"],["Скучно","8:2,9:1,3:1"]]]];
 const MOOD=["Хочется тишины и покоя","Хочется веселья и музыки","Хочется двигаться и гулять","Хочется покупок и впечатлений","Хочется воды и прохлады","Хочется тепла и расслабления","Хочется уехать от городской суеты","Хочется вкусно посидеть","Хочется азарта и игр","Хочется ярких эмоций"];
 let rec=[],qi=0,sc=Array(10).fill(0),en=0;
+function G(on){document.getElementById("quiz").className=on?"gate":"off";document.body.style.overflow=on?"hidden":"";["out","q","tabs"].forEach(i=>document.getElementById(i).inert=on)}
 function Q(){const el=document.getElementById("quiz");
 if(qi>=QS.length){const o=sc.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]);rec=[o[0][1],o[1][1]];const pc=Math.round(en/4*100);
-el.innerHTML=`<h2>Ваше настроение: ${MOOD[rec[0]]}</h2><div class="meter"><i style="width:${pc}%"></i></div><p>Уровень энергии: ${pc}%. Мы подобрали для вас: «${D[rec[0]][1]}» и «${D[rec[1]][1]}» — они ниже.</p><button class="btn" id="rs">Пройти тест заново</button>`;
-document.getElementById("rs").onclick=()=>{qi=0;sc.fill(0);en=0;rec=[];cat=-1;Q();tabsR();R()};cat=-3;tabsR();R();return}
-const t=QS[qi];el.innerHTML=`<p class="qn">Вопрос ${qi+1} из 5</p><h2>${t[0]}</h2>`;
+el.innerHTML=`<h2>Ваше настроение: ${MOOD[rec[0]]}</h2><div class="meter"><i style="width:${pc}%"></i></div><p>Уровень энергии: ${pc}%. Мы подобрали для вас: «${D[rec[0]][1]}» и «${D[rec[1]][1]}» — они ниже.</p><button class="btn" id="go">Показать подборку →</button><button class="btn" id="rs">Пройти тест заново</button>`;
+document.getElementById("go").onclick=()=>{G(false);scrollTo(0,0)};document.getElementById("rs").onclick=()=>{qi=0;sc.fill(0);en=0;rec=[];cat=-1;Q();tabsR();R()};cat=-3;tabsR();R();return}
+const t=QS[qi];el.innerHTML=`${qi?"":"<h1 style='margin:0 0 6px'>🌆 Отдых в Астане</h1><p style='color:var(--m)'>Ответьте на 5 вопросов — мы подберём места под ваше настроение.</p>"}<p class="qn">Вопрос ${qi+1} из 5</p><h2>${t[0]}</h2>`;
 t[1].forEach((o,j)=>{const b=document.createElement("button");b.className="btn";b.textContent=o[0];b.onclick=()=>{o[1].split(",").forEach(x=>{const[c,w]=x.split(":");sc[c]+=+w});if(qi==0)en+=2-j;if(qi==4)en+=[0,2,1,1][j];qi++;Q()};el.appendChild(b)})}
 let F=[];try{F=JSON.parse(localStorage.getItem("fav")||"[]")}catch(e){}
 let cat=-1,q="";
@@ -127,9 +131,9 @@ function R(){out.innerHTML="";D.forEach((d,ci)=>{if(cat>=0&&cat!==ci)return;if(c
 const h=document.createElement("h2");h.textContent=d[0]+" "+d[1];out.appendChild(h);const g=document.createElement("div");g.className="g";
 items.forEach(p=>{const k=ci+"|"+p[0];const c=document.createElement("div");c.className="card";
 c.innerHTML="<h3></h3><p></p><small></small>";c.children[0].textContent=p[0];c.children[1].textContent=p[1];c.children[2].textContent=p[2]?"📍 "+p[2]:"";
-const f=document.createElement("button");f.className="fav"+(F.includes(k)?" on":"");f.textContent="♥";f.setAttribute("aria-label","В избранное");
+const a=document.createElement("a");a.className="ph";a.href="https://www.google.com/search?tbm=isch&q="+encodeURIComponent(p[0]+" Астана");a.target="_blank";a.rel="noopener";a.textContent="📷 Смотреть фото";c.appendChild(a);const f=document.createElement("button");f.className="fav"+(F.includes(k)?" on":"");f.textContent="♥";f.setAttribute("aria-label","В избранное");
 f.onclick=()=>{F=F.includes(k)?F.filter(x=>x!==k):[...F,k];try{localStorage.setItem("fav",JSON.stringify(F))}catch(e){}R()};c.appendChild(f);g.appendChild(c)});out.appendChild(g)});
 if(!out.children.length)out.innerHTML="<p style='color:var(--m)'>Ничего не найдено.</p>"}
 document.getElementById("q").oninput=e=>{q=e.target.value.toLowerCase();R()};
-tabsR();R();Q();
+tabsR();R();document.getElementById("rt").onclick=()=>{qi=0;sc.fill(0);en=0;rec=[];cat=-1;G(true);Q();tabsR();R()};G(true);Q();
 </script></body></html>
