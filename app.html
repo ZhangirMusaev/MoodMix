@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Отдых в Астане</title>
+<style>
+:root{--bg:#f6f8fb;--c:#fff;--t:#14202e;--m:#5b6b7d;--a:#0a8f8f;--b:#dde4ec;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1720;--c:#182331;--t:#e8eef5;--m:#9aabbd;--a:#3cc5c5;--b:#2a394b}}
+:root[data-theme="dark"]{--bg:#0f1720;--c:#182331;--t:#e8eef5;--m:#9aabbd;--a:#3cc5c5;--b:#2a394b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--t);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+header{padding:32px 16px 16px;text-align:center}
+h1{margin:0 0 6px;font-size:1.8rem}header p{margin:0;color:var(--m)}
+.bar{max-width:1000px;margin:0 auto;padding:0 16px}
+input{width:100%;box-sizing:border-box;padding:12px 14px;border:1px solid var(--b);border-radius:10px;background:var(--c);color:var(--t);font:inherit;margin:12px 0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.tabs button{border:1px solid var(--b);background:var(--c);color:var(--t);padding:8px 12px;border-radius:20px;cursor:pointer;font:inherit;font-size:.9rem}
+.tabs button.on{background:var(--a);color:#fff;border-color:var(--a)}
+main{max-width:1000px;margin:0 auto;padding:8px 16px 40px}
+h2{margin:24px 0 10px;font-size:1.3rem}
+.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.card{background:var(--c);border:1px solid var(--b);border-radius:12px;padding:14px;position:relative}
+.card h3{margin:0 40px 4px 0;font-size:1.05rem}.card p{margin:0 0 6px;color:var(--m);font-size:.93rem}
+.card small{color:var(--a)}
+.fav{position:absolute;top:10px;right:10px;border:0;background:none;font-size:1.4rem;cursor:pointer;color:var(--m)}
+.fav.on{color:#e0245e}
+#quiz{max-width:968px;margin:8px auto 12px;padding:16px;background:var(--c);border:1px solid var(--b);border-radius:14px}#quiz h2{margin:4px 0 12px}.qn{margin:0;color:var(--a);font-size:.85rem}
+.btn{display:block;width:100%;text-align:left;margin:8px 0;padding:12px 14px;border:1px solid var(--b);border-radius:10px;background:var(--bg);color:var(--t);font:inherit;cursor:pointer}.btn:hover{border-color:var(--a)}
+.meter{height:10px;background:var(--b);border-radius:6px;overflow:hidden}.meter i{display:block;height:100%;background:var(--a)}
+#quiz.gate{position:fixed;inset:0;z-index:100;max-width:none;margin:0;border-radius:0;border:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;overflow:auto;padding:calc(24px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px))}
+#quiz.gate::before,#quiz.gate::after{content:"";flex:1}#quiz.gate>*{width:100%;max-width:560px;box-sizing:border-box}#quiz.off{display:none}
+.ph{display:inline-block;margin:2px 0 0;color:var(--a);font-size:.9rem;text-decoration:none}
+footer{text-align:center;color:var(--m);font-size:.85rem;padding:0 16px 30px}
+
+[hidden]{display:none!important}
+.m{color:var(--m)}.er{color:#e0245e;min-height:1.3em;margin:6px 0 0}
+#auth{position:fixed;inset:0;overflow:auto;display:flex;padding:calc(20px + env(safe-area-inset-top,0px)) 16px calc(20px + env(safe-area-inset-bottom,0px))}
+.ac{width:100%;max-width:440px;margin:auto}.ac h1{margin:0 0 8px}
+.tb{display:flex;gap:8px;margin:18px 0 0}.tb button{flex:1;padding:10px;border:1px solid var(--b);border-radius:10px;background:var(--c);color:var(--t);font:inherit;cursor:pointer}
+.tb button.on,.c{background:var(--a);color:#fff;border-color:var(--a)}.c{text-align:center}
+#app header{display:flex;justify-content:space-between;align-items:center;max-width:1000px;margin:0 auto;padding:16px;text-align:left}#app header h1{font-size:1.4rem}
+#av,.av2{width:44px;height:44px;flex:none;border-radius:50%;border:0;background:var(--a);color:#fff;font:700 1.1rem system-ui,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center}
+#pf{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+.pc{background:var(--c);border-radius:14px;max-width:520px;width:100%;max-height:85vh;overflow:auto;padding:20px;box-sizing:border-box}
+.pc h3{margin:18px 0 6px}.pc ul{padding-left:18px;margin:0}.pc li{margin:4px 0}
+.vb{display:inline-block;margin:6px 8px 0 0;padding:6px 10px;border:1px solid var(--a);border-radius:8px;background:none;color:var(--a);font:inherit;font-size:.88rem;cursor:pointer}
+#toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--t);color:var(--bg);padding:10px 16px;border-radius:20px;opacity:0;transition:.3s;pointer-events:none;z-index:300}#toast.on{opacity:1}
+</style></head><body>
+<div id="quiz" class="gate" hidden></div>
+<div id="app" hidden><header><h1>🌆 Отдых в Астане</h1><button id="av" aria-label="Профиль"></button></header>
+<div class="bar"><div id="ban"></div><input id="q" placeholder="Поиск по местам…"><div class="tabs" id="tabs"></div></div><main id="out"></main>
+<footer>Часы работы и цены меняются — уточняйте перед визитом.</footer></div>
+<div id="pf" hidden><div class="pc" id="pfc"></div></div><div id="toast"></div>
+<script src="db.js"></script>
+<script>
+const D=[
+["🌿","Уединение",[
+["Ботанический сад","Тихие аллеи, оранжереи и пруды — спокойное место, чтобы побыть наедине.","Район Ишима, ул. Достык"],
+["Национальный музей РК","Просторные залы, где мало людей в будни; можно провести полдня.","Пл. Независимости"],
+["Парк «Жастар»","Зелёный парк с прудом и скамейками вдали от шума проспектов.","Левый берег"],
+["Дворец Мира и Согласия","Пирамида с зимним садом внутри: тишина, свет и зелень.","Левый берег"],
+["Набережная Ишима на рассвете","Утром здесь почти пусто, идеально для тихих мыслей.","Центр"]]],
+["🎉","Вечеринки",[
+["Oasis Beach Club","Пляжный клуб с бассейном, диджеями и летними вечеринками.","пр. Туран, 8/1а"],
+["Teplo","База отдыха с бассейнами, баром и «пенными вечеринками».","шоссе Каркаралы, 11"],
+["Лаунж-бар Ritz-Carlton","Коктейли и панорама города для стильного вечера.","Левый берег"],
+["Rixos President — бары","Отельные бары и рестораны для встреч с друзьями.","Левый берег"],
+["Караоке-залы в ТРЦ","Приватные комнаты для дней рождения и корпоративов.","Разные ТРЦ"]]],
+["🚶","Прогулки",[
+["Набережная Ишима","Главный променад города с видом на Байтерек и мосты.","Центр"],
+["Центральный парк","Аллеи, фонтаны, пруд и лодки; удобно гулять всей семьёй.","Левый берег"],
+["Президентский парк","Просторный парк рядом с Акордой, ровные дорожки.","Левый берег"],
+["Парк «Жібек Жолы»","Зелёная зона для неспешных прогулок и пробежек.","Правый берег"],
+["Территория EXPO / Нур-Алем","Футуристичная архитектура и открытые площадки.","Левый берег"]]],
+["🛍️","Шопинг и ТЦ",[
+["Хан Шатыр","Шатёр-ТРЦ Нормана Фостера: магазины, кино, зоны отдыха.","пр. Тауелсиздик, 15"],
+["Mega Silk Way","Один из крупнейших центров с брендами и рестораном.","пр. Кабанбай батыра, 62"],
+["Dostyk Plaza","Модные магазины, кофейни и детские зоны.","ул. Достык, 24"],
+["Keruen","Центр с большим выбором магазинов и общепита.","пр. Тауелсиздик"],
+["Asia Park","Удобный семейный ТРЦ с развлечениями.","пр. Кабанбай батыра"]]],
+["🏊","Бассейны",[
+["Oasis Beach Club","Открытый бассейн у Центрального парка (от 10 000 ₸ взрослым).","пр. Туран, 8/1а"],
+["Sky Beach Club (Хан Шатыр)","Тропический пляж под куполом круглый год.","Хан Шатыр"],
+["Teplo","Два бассейна, хамам и анимация в цене билета.","шоссе Каркаралы, 11"],
+["Nomad Spa","Бассейны и SPA-зона на природе.","Пригород"],
+["BalQaragai","Загородный комплекс: бассейн и прогулки на природе.","Пригород"]]],
+["🧖","Сауны и бани",[
+["Bath Village","Русская баня, фурако и зона настольных игр.","Астана"],
+["Банный комплекс «888»","Популярный комплекс для компаний и семей.","Астана"],
+["«Люкс»","Кедровая баня на дровах без ограничения по времени.","Астана"],
+["Nomad Spa","Сакская, берёзовая и травяная бани, тёплый чан.","Пригород"],
+["Хамам в Teplo","Хамам и парная включены в билет.","шоссе Каркаралы, 11"]]],
+["🌲","Вдали от суеты",[
+["Бурабай","Сосновые леса и озёра, около 3–4 часов на машине.","Акмолинская обл."],
+["Коргальжинский заповедник","Озёра и фламинго, отличное место для тишины.","~130 км от города"],
+["BalQaragai","Загородный отдых у природы недалеко от Астаны.","Пригород"],
+["Nomad Spa","Катамараны, рыбалка и бани на берегу.","Пригород"],
+["Базы и глэмпинги Акмолинской обл.","Домики в лесу и у озёр на выходные.","Окрестности"]]],
+["🍽️","Кафе и рестораны",[
+["Line Brew","Популярная кофейня и завтраки.","Астана"],
+["Rumi","Ресторан узбекской кухни с уютной атмосферой.","Астана"],
+["Hazara","Восточная кухня и большие компании.","Астана"],
+["Del Papa","Итальянская кухня: паста и пицца.","Астана"],
+["Coffee Boom","Недорогой кофе и десерты.","Астана"]]],
+["🎮","Игровые клубы",[
+["Боулинг в Mega Silk Way","Дорожки и игровая зона для компаний.","Mega Silk Way"],
+["Timezone в Dostyk Plaza","Аркадные автоматы и игры для всех возрастов.","Dostyk Plaza"],
+["Игровые зоны Asia Park","Автоматы и детские игры внутри ТРЦ.","Asia Park"],
+["Keruen — развлечения","Игровые зоны и кинотеатр в одном месте.","Keruen"],
+["Квест-комнаты","Командные квесты и настольные клубы по всему городу.","Разные адреса"]]],
+["🎡","Аттракционы",[
+["Байтерек","Смотровая площадка на 97 м — символ Астаны.","Левый берег"],
+["Парк аттракционов Центрального парка","Колесо обозрения и карусели.","Центральный парк"],
+["Астанинский зоопарк","Животные со всего мира; хорошо для детей.","Астана"],
+["Хан Шатыр — развлечения","Кинотеатр, аквапарк и детские зоны.","Хан Шатыр"],
+["Нур-Алем (сфера)","Самое большое сферическое здание, музей будущего.","EXPO"]]]
+];
+const E=[
+[["Хазрет Султан","Одна из крупнейших мечетей: тихий двор и покой."],["Национальная библиотека","Читальные залы и панорамный вид на город."],["Астана Опера","Спокойный вечер классической музыки."],["Музей Первого Президента","Тихие залы и много пространства."],["SPA в отелях левого берега","Массаж и тишина для перезагрузки."]],
+[["Кальянные с DJ-сетами","Музыка и общение до поздней ночи."],["Рестораны с живой музыкой","Выступления артистов по выходным."],["Крышные бары города","Коктейли с видом на огни Астаны."],["Стендап-клубы","Вечер юмора с друзьями."],["Клубы левого берега","Танцы и ночные вечеринки по выходным."]],
+[["Бульвар Нұржол","Главная пешеходная аллея к Байтереку."],["Парк Влюблённых","Романтичные дорожки и пруд."],["Парк Победы","Просторные аллеи для неспешной прогулки."],["Мост «Слияние»","Красивые виды на Ишим и закат."],["Аллея у Астана Арены","Ровные дорожки для прогулки и бега."]],
+[["Sary-Arka Mall","Магазины, кафе и кинотеатр."],["Рынок «Артём»","Продукты, одежда и местный колорит."],["Улица Кунаева","Бутики и магазины в центре."],["Аутлеты города","Бренды со скидками."],["Торговые галереи Хан Шатыра","Много бутиков под одной крышей."]],
+[["Дворец водных видов спорта","Большой бассейн для плавания."],["World Class","Бассейн в фитнес-клубе."],["Бассейн отеля Rixos","Комфорт и спокойный отдых у воды."],["Бассейн отеля Hilton","Плавание в уютной обстановке."],["Детские бассейны","Безопасные бассейны для малышей."]],
+[["Хаммам в SPA-центрах","Пар, скрабы и полное расслабление."],["Русские бани по часам","Аренда бани для своей компании."],["Сауны с бассейном","Финская сауна и купель для компании."],["SPA-салоны с массажем","Массаж и уход после парной."],["Финская сауна в отелях","Сухой пар и комфорт."]],
+[["Озеро Зеренда","Тихие берега и природа Акмолинской области."],["Ерейментау","Степные просторы и ветряные поля."],["Кокшетау и озёра","Озёра и леса в окрестностях города."],["Национальный парк Кокшетау","Сосновые леса и скалы для уединения."],["Озеро Шортанды","Спокойный отдых у воды рядом с городом."]],
+[["Starbucks","Кофе и десерты, удобно для встречи."],["Bochka","Уютное место для ужина в компании."],["Ауыл","Национальная кухня в тёплой атмосфере."],["Sushi Master","Роллы и суши для любителей японской кухни."],["Пекарни и кофейни центра","Свежая выпечка и кофе."]],
+[["PlayStation-клубы","Приставки и турниры с друзьями."],["Киберклубы","Компьютерные игры и турниры."],["Лазертаг","Командные бои для компаний."],["Бильярдные клубы","Бильярд и настольные игры."],["Батутные парки","Прыжки и активные игры."]],
+[["Аквапарк Хан Шатыра","Горки и бассейны под куполом."],["Экскурсия по Астана Арене","Стадион с раздвижной крышей."],["Лодки в Центральном парке","Катание по пруду."],["Каток зимой","Открытые катки в центре города."],["Смотровые площадки","Панорамы города с высоты."]]];E.forEach((e,i)=>D[i][2].push(...e));
+const QS=[["Сколько у вас сейчас энергии?",[["Много, хочется движения","1:2,8:1,9:2,4:1"],["Средне","2:2,3:1,7:1"],["Мало, хочется отдохнуть","0:2,5:2,6:1"]]],
+["С кем хочется провести время?",[["Одному","0:2,6:2,5:1"],["С близким человеком","7:2,2:1,0:1,6:1"],["С друзьями","1:2,8:2,5:1"],["С семьёй","9:2,3:1,4:1,2:1"]]],
+["Что сейчас важнее всего?",[["Тишина и покой","0:2,6:2"],["Азарт и движение","8:2,9:2,1:1"],["Комфорт и релакс","5:2,4:1,7:1"],["Новые впечатления","9:2,2:1,3:1"]]],
+["Какая обстановка привлекает?",[["Природа","6:2,2:2,0:1"],["В помещении","3:2,8:1,7:1"],["Вода и тепло","4:2,5:2"],["Городская суета","1:2,3:1,9:1"]]],
+["Как вы себя чувствуете?",[["Устал(а)","5:2,6:2,0:1"],["Радостно","1:2,9:2,4:1"],["Задумчиво","0:2,2:1,7:1"],["Скучно","8:2,9:1,3:1"]]]];
+const MOOD=["Хочется тишины и покоя","Хочется веселья и музыки","Хочется двигаться и гулять","Хочется покупок и впечатлений","Хочется воды и прохлады","Хочется тепла и расслабления","Хочется уехать от городской суеты","Хочется вкусно посидеть","Хочется азарта и игр","Хочется ярких эмоций"];
+
+const $=i=>document.getElementById(i),esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fd=t=>new Date(t).toLocaleString("ru-RU",{dateStyle:"medium",timeStyle:"short"});
+async function api(p,b){return DB.call(p,b)}
+let U=null,cat=-1,q="",rec=[],qi=0,sc=Array(10).fill(0),en=0,mode="login";
+function view(v){["quiz","app"].forEach(x=>$(x).hidden=x!==v);document.body.style.overflow=v==="app"?"":"hidden"}
+function toast(t){const e=$("toast");e.textContent=t;e.className="on";setTimeout(()=>e.className="",2200)}
+function enter(){$("av").textContent=U.login[0].toUpperCase();if(U.last){rec=U.last.cats;cat=-3;view("app");draw()}else startQ()}
+function startQ(){qi=0;sc.fill(0);en=0;view("quiz");Q()}
+function Q(){const el=$("quiz");if(qi>=QS.length)return fin();const t=QS[qi];
+el.innerHTML=`${qi?"":"<h1 style='margin:0 0 6px'>Ваше настроение</h1><p class='m'>Ответьте на 5 вопросов — мы подберём места под ваше настроение.</p>"}<p class="qn">Вопрос ${qi+1} из 5</p><h2>${t[0]}</h2>`;
+t[1].forEach((o,j)=>{const b=document.createElement("button");b.className="btn";b.textContent=o[0];b.onclick=()=>{o[1].split(",").forEach(x=>{const[c,w]=x.split(":");sc[c]+=+w});if(qi==0)en+=2-j;if(qi==4)en+=[0,2,1,1][j];qi++;Q()};el.appendChild(b)})}
+async function fin(){const o=sc.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]);rec=[o[0][1],o[1][1]];const pc=Math.round(en/4*100);
+try{U=await api("mood",{mood:MOOD[rec[0]],energy:pc,cats:rec})}catch(e){toast(e.message)}
+$("quiz").innerHTML=`<h2>Ваше настроение: ${MOOD[rec[0]]}</h2><div class="meter"><i style="width:${pc}%"></i></div><p>Уровень энергии: ${pc}%. Мы подобрали для вас: «${D[rec[0]][1]}» и «${D[rec[1]][1]}».</p><button class="btn c" id="go">Показать подборку →</button><button class="btn" id="rs">Пройти тест заново</button>`;
+$("go").onclick=()=>{cat=-3;view("app");draw();scrollTo(0,0)};$("rs").onclick=startQ}
+function draw(){$("ban").innerHTML=U.last?`<div class="card" style="margin-bottom:8px">Последнее настроение: <b>${esc(U.last.mood)}</b> · ${fd(U.last.at)}</div>`:"";tabsR();R()}
+function tabsR(){const t=$("tabs");t.innerHTML="";[["Все",-1],...(rec.length?[["✨ Для вас",-3]]:[]),["❤ Избранное",-2],...D.map((d,i)=>[d[0]+" "+d[1],i])].forEach(([n,i])=>{const b=document.createElement("button");b.textContent=n;if(cat===i)b.className="on";b.onclick=()=>{cat=i;tabsR();R()};t.appendChild(b)})}
+function R(){const out=$("out");out.innerHTML="";const vm={};U.visits.forEach(v=>vm[v.place]=v.at);
+D.forEach((d,ci)=>{if(cat>=0&&cat!==ci)return;if(cat===-3&&!rec.includes(ci))return;
+const items=d[2].filter(p=>(cat!==-2||U.favs.includes(ci+"|"+p[0]))&&(p[0]+p[1]+(p[2]||"")).toLowerCase().includes(q));if(!items.length)return;
+const h=document.createElement("h2");h.textContent=d[0]+" "+d[1];out.appendChild(h);const g=document.createElement("div");g.className="g";
+items.forEach(p=>{const k=ci+"|"+p[0],c=document.createElement("div");c.className="card";
+c.innerHTML=`<h3>${esc(p[0])}</h3><p>${esc(p[1])}</p>${p[2]?`<small>📍 ${esc(p[2])}</small><br>`:""}`;
+const a=document.createElement("a");a.className="ph";a.href="https://www.google.com/search?tbm=isch&q="+encodeURIComponent(p[0]+" Астана");a.target="_blank";a.rel="noopener";a.textContent="📷 Смотреть фото";c.appendChild(a);c.appendChild(document.createElement("br"));
+const vb=document.createElement("button");vb.className="vb";vb.textContent="✔ Был здесь";vb.onclick=async()=>{try{U=await api("visit",{place:p[0],cat:d[1]});toast("Записали в вашу историю ✔");R()}catch(e){toast(e.message)}};c.appendChild(vb);
+if(vm[p[0]]){const s=document.createElement("small");s.textContent="Были: "+fd(vm[p[0]]);c.appendChild(s)}
+const f=document.createElement("button");f.className="fav"+(U.favs.includes(k)?" on":"");f.textContent="♥";f.setAttribute("aria-label","В избранное");f.onclick=async()=>{try{U=await api("fav",{key:k});R()}catch(e){toast(e.message)}};c.appendChild(f);g.appendChild(c)});out.appendChild(g)});
+if(!out.children.length)out.innerHTML="<p class='m'>Ничего не найдено.</p>"}
+$("q").oninput=e=>{q=e.target.value.toLowerCase();R()};
+$("av").onclick=()=>{const l=U.last,vs=U.visits.slice().reverse().slice(0,50),ms=U.moods.slice().reverse().slice(0,10);
+$("pfc").innerHTML=`<div style="display:flex;gap:12px;align-items:center"><div class="av2">${esc(U.login[0].toUpperCase())}</div><div><h2 style="margin:0">${esc(U.login)}</h2><small class="m">С нами с ${fd(U.created)}</small></div></div>
+<h3>Последнее настроение</h3>${l?`<p><b>${esc(l.mood)}</b><br>Энергия: ${l.energy}% · ${fd(l.at)}</p>`:"<p class='m'>Тест ещё не пройден</p>"}
+<h3>Где вы были (${U.visits.length})</h3>${vs.length?"<ul>"+vs.map(v=>`<li>${esc(v.place)} <span class="m">· ${esc(v.cat)} · ${fd(v.at)}</span></li>`).join("")+"</ul>":"<p class='m'>Отмечайте места кнопкой «✔ Был здесь»</p>"}
+<h3>История настроения</h3>${ms.length?"<ul>"+ms.map(m=>`<li>${esc(m.mood)} <span class="m">· ${m.energy}% · ${fd(m.at)}</span></li>`).join("")+"</ul>":"<p class='m'>Пока пусто</p>"}
+<button class="btn" id="rq">Пройти тест заново</button><button class="btn" id="lo">Выйти</button><button class="btn" id="cl">Закрыть</button>`;
+$("pf").hidden=false;$("cl").onclick=()=>$("pf").hidden=true;$("rq").onclick=()=>{$("pf").hidden=true;startQ()};
+$("lo").onclick=async()=>{await api("logout");location.replace("index.html")}};
+$("pf").onclick=e=>{if(e.target.id=="pf")$("pf").hidden=true};
+(async()=>{try{U=await api("me");enter()}catch{location.replace("index.html")}})();
+</script></body></html>
